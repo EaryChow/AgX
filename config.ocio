@@ -77,9 +77,29 @@ displays:
     - !<View> {name: AgX, colorspace: AgX Base Rec.2020}
     - !<View> {name: False Color, colorspace: AgX False Color Rec.2020}
     - !<View> {name: Raw, colorspace: Non-Color}
-active_displays: [sRGB, Display P3, Rec.1886, Rec.2020]
+  Rec.2100-HLG:
+    - !<View> {name: Standard, colorspace: Rec.2100-HLG}
+    - !<View> {name: AgX, colorspace: AgX Base Rec.2100-HLG}
+    - !<View> {name: False Color, colorspace: AgX False Color Rec.2020}
+    - !<View> {name: Raw, colorspace: Non-Color}
+  Rec.2100-HLG P3 Limited:
+    - !<View> {name: Standard, colorspace: Rec.2100-HLG P3 limited}
+    - !<View> {name: AgX, colorspace: AgX Base Rec.2100-HLG P3 limited}
+    - !<View> {name: False Color, colorspace: AgX False Color Rec.2020}
+    - !<View> {name: Raw, colorspace: Non-Color}
+  Rec.2100-PQ 1000 nits Limited:
+    - !<View> {name: Standard, colorspace: Rec.2100-PQ 1000 nits limited}
+    - !<View> {name: AgX, colorspace: AgX Base Rec.2100-PQ 1000 nits}
+    - !<View> {name: False Color, colorspace: AgX False Color PQ 1000 nit}
+    - !<View> {name: Raw, colorspace: Non-Color}
+  Rec.2100-PQ 1000 nits P3 Limited:
+    - !<View> {name: Standard, colorspace: Rec.2100-PQ 1000 nits P3 limited}
+    - !<View> {name: AgX, colorspace: AgX Base Rec.2100-PQ 1000 nits P3 limited}
+    - !<View> {name: False Color, colorspace: AgX False Color PQ 1000 nit}
+    - !<View> {name: Raw, colorspace: Non-Color}
+active_displays: [sRGB, Display P3, Rec.1886, Rec.2020, Rec.2100-HLG, Rec.2100-HLG P3 Limited, Rec.2100-PQ 1000 nits Limited, Rec.2100-PQ 1000 nits P3 Limited]
 active_views: [Standard, AgX, Filmic, Filmic Log, False Color, Raw]
-inactive_colorspaces: [Luminance Compensation Rec.2020, Luminance Compensation sRGB, Luminance Compensation P3, AgX False Color Rec.709, AgX False Color P3, AgX False Color Rec.1886, AgX False Color Rec.2020]
+inactive_colorspaces: [Luminance Compensation Rec.2020, Luminance Compensation sRGB, Luminance Compensation P3, AgX False Color Rec.709, AgX False Color P3, AgX False Color Rec.1886, AgX False Color Rec.2020, AgX False Color PQ 1000 nit, Rec.2100-HLG P3 limited, Rec.2100-PQ 1000 nits limited, Rec.2100-PQ 1000 nits P3 limited]
 
 colorspaces:
   - !<ColorSpace>
@@ -244,6 +264,89 @@ colorspaces:
         - !<ExponentWithLinearTransform> {gamma: 2.4, offset: 0, direction: inverse}
 
   - !<ColorSpace>
+    name: Rec.2100-HLG
+    aliases: [rec2100_hlg_display, Rec.2100-HLG - Display, BT.2100-HLG]
+    family: Displays/HDR
+    equalitygroup: ""
+    bitdepth: 32f
+    description: BT.2100-HLG, 1000 nit Display
+    isdata: false
+    allocation: uniform
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ I-E, dst: Linear CIE-XYZ I-D65}
+        - !<BuiltinTransform> {style: DISPLAY - CIE-XYZ-D65_to_REC.2100-HLG-1000nit}
+
+  - !<ColorSpace>
+    name: Rec.2100-HLG P3 limited
+    aliases: []
+    family: Displays/HDR
+    equalitygroup: ""
+    bitdepth: 32f
+    description: BT.2100-HLG, 1000 nit P3 limited Display
+    isdata: false
+    allocation: uniform
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ I-E, dst: Linear DCI-P3 D65}
+        - !<RangeTransform> {min_in_value: 0, min_out_value: 0}
+        - !<ColorSpaceTransform> {src: Linear DCI-P3 D65, dst: Rec.2100-HLG}
+
+  - !<ColorSpace>
+    name: Rec.2100-PQ
+    aliases: [Rec.2100-PQ - Display, rec2100_pq_display]
+    family: Displays/HDR
+    equalitygroup: ""
+    bitdepth: 32f
+    description: BT.2100-ST.2084 1000 nits limited display
+    isdata: false
+    allocation: uniform
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ I-E, dst: Linear BT.2020 I-D65}
+        - !<BuiltinTransform> {style: CURVE - LINEAR_to_ST-2084}
+
+  - !<ColorSpace>
+    name: Rec.2100-PQ 1000 nits limited
+    aliases: []
+    family: Displays/HDR
+    equalitygroup: ""
+    bitdepth: 32f
+    description: BT.2100-ST.2084 1000 nits limited display
+    isdata: false
+    allocation: uniform
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear Rec.2020}
+        - !<RangeTransform> {max_in_value: 10, max_out_value: 10}
+        - !<BuiltinTransform> {style: CURVE - LINEAR_to_ST-2084}
+    to_scene_reference: !<GroupTransform>
+      children:
+        - !<BuiltinTransform> {style: CURVE - LINEAR_to_ST-2084, direction: inverse}
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear Rec.2020, direction: inverse}
+
+  - !<ColorSpace>
+    name: Rec.2100-PQ 1000 nits P3 limited
+    aliases: []
+    family: Displays/HDR
+    equalitygroup: ""
+    bitdepth: 32f
+    description: BT.2100-ST.2084 1000 nits limited display
+    isdata: false
+    allocation: uniform
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear DCI-P3 D65}
+        - !<RangeTransform> {min_in_value: 0, min_out_value: 0}
+        - !<ColorSpaceTransform> {src: Linear DCI-P3 D65, dst: Linear Rec.2020}
+        - !<RangeTransform> {max_in_value: 10, max_out_value: 10}
+        - !<BuiltinTransform> {style: CURVE - LINEAR_to_ST-2084}
+    to_scene_reference: !<GroupTransform>
+      children:
+        - !<BuiltinTransform> {style: CURVE - LINEAR_to_ST-2084, direction: inverse}
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear Rec.2020, direction: inverse}
+
+  - !<ColorSpace>
     name: Non-Color
     aliases: [Generic Data, Non-Colour Data, Raw, Utility - Raw]
     family: Data
@@ -265,7 +368,7 @@ colorspaces:
       children:
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear Rec.709}
         - !<AllocationTransform> {allocation: lg2, vars: [-12.473931188, 12.526068812]}
-        - !<FileTransform> {src: filmic_desat_33.cube, interpolation: tetrahedral}
+        - !<FileTransform> {src: filmic_desat65cube.spi3d, interpolation: tetrahedral}
         - !<AllocationTransform> {allocation: uniform, vars: [0, 0.66]}
     to_scene_reference: !<GroupTransform>
       children:
@@ -361,7 +464,7 @@ colorspaces:
         - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 12.5260688117], direction: inverse}
         - !<MatrixTransform> {matrix: [0.856627153315983, 0.0951212405381588, 0.0482516061458583, 0, 0.137318972929847, 0.761241990602591, 0.101439036467562, 0, 0.11189821299995, 0.0767994186031903, 0.811302368396859, 0, 0, 0, 0, 1], direction: inverse}
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear Rec.2020, direction: inverse}
-
+        
   - !<ColorSpace>
     name: AgX Base Rec.2020
     aliases: [AgX Base BT.2020]
@@ -381,6 +484,60 @@ colorspaces:
         - !<FileTransform> {src: Inverse_AgX_Base_Rec2020.cube, interpolation: tetrahedral}
         - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 4.026069], direction: inverse}
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear Rec.2020, direction: inverse}
+
+  - !<ColorSpace>
+    name: AgX Base Rec.2100-HLG
+    family: Imagery
+    equalitygroup: ""
+    bitdepth: unknown
+    description: AgX Base Image Encoding for BT.2100-HLG 1000 nits Display
+    isdata: false
+    allocation: uniform
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Rec.2020}
+        - !<CDLTransform> {power: [1.35295, 1.35295, 1.35295], slope: [0.89, 0.89, 0.89]}
+
+  - !<ColorSpace>
+    name: AgX Base Rec.2100-PQ 1000 nits
+    family: Imagery
+    equalitygroup: ""
+    bitdepth: unknown
+    description: AgX Base Image Encoding for BT.2100-PQ 1000 nits Display
+    isdata: false
+    allocation: uniform
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Rec.2100-HLG}
+        - !<ColorSpaceTransform> {src: Rec.2100-HLG, dst: Rec.2100-PQ}
+
+  - !<ColorSpace>
+    name: AgX Base Rec.2100-PQ 1000 nits P3 limited
+    family: Imagery
+    equalitygroup: ""
+    bitdepth: unknown
+    description: AgX Base Image Encoding for BT.2100-PQ 1000 nits Display
+    isdata: false
+    allocation: uniform
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Rec.2100-HLG P3 limited}
+        - !<ColorSpaceTransform> {src: Rec.2100-HLG, dst: Rec.2100-PQ}
+
+  - !<ColorSpace>
+    name: AgX Base Rec.2100-HLG P3 limited
+    family: Imagery
+    equalitygroup: ""
+    bitdepth: unknown
+    description: AgX Base Image Encoding for BT.2100-HLG 1000 nits P3 limited Display
+    isdata: false
+    allocation: uniform
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Display P3}
+        - !<ColorSpaceTransform> {src: Display P3, dst: Rec.2020}
+        - !<RangeTransform> {min_in_value: 0, min_out_value: 0}
+        - !<CDLTransform> {power: [1.35295, 1.35295, 1.35295], slope: [0.89, 0.89, 0.89]}
 
   - !<ColorSpace>
     name: AgX Base sRGB
@@ -456,7 +613,7 @@ colorspaces:
         - !<ColorSpaceTransform> {src: Rec.2020, dst: Linear Rec.2020}
         - !<MatrixTransform> {matrix: [0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0, 0, 0, 1]}
         - !<ExponentTransform> {value: 2.5, direction: inverse}
-        - !<FileTransform> {src: AgX_False_Color.spi1d, interpolation: tetrahedral}
+        - !<FileTransform> {src: AgX_False_Color.spi1d, interpolation: linear}
 
   - !<ColorSpace>
     name: AgX False Color P3
@@ -484,6 +641,20 @@ colorspaces:
       children:
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX False Color Rec.709}
         - !<ColorSpaceTransform> {src: Rec.1886, dst: Rec.2020}
+
+  - !<ColorSpace>
+    name: AgX False Color PQ 1000 nit
+    aliases: []
+    family: Imagery
+    equalitygroup:
+    bitdepth: unknown
+    description: |
+      AgX false color heat map for BT.2100 PQ 1000 nits display
+    isdata: false
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ I-E, dst: AgX False Color Rec.2020}
+        - !<ColorSpaceTransform> {src: Rec.2100-HLG, dst: Rec.2100-PQ}
 
 looks:
   - !<Look>
