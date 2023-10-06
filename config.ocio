@@ -545,11 +545,9 @@ colorspaces:
     allocation: uniform
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ExposureContrastTransform> {exposure: -2.8878}
-        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Rec.2020}
-        - !<ExponentTransform> {value: 2.4}
-        - !<CDLTransform> {slope: [10, 10, 10]}
-        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: Rec.2100-HLG}
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear FilmLight E-Gamut}
+        - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 12.5260688117]}
+        - !<FileTransform> {src: AgX_Base_Rec2100-HLG.cube, interpolation: tetrahedral}
 
   - !<ColorSpace>
     name: AgX Base Rec.2100-PQ 1000 nits
@@ -588,11 +586,9 @@ colorspaces:
     allocation: uniform
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ExposureContrastTransform> {exposure: -2.8878}
-        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Display P3}
-        - !<ColorSpaceTransform> {src: Display P3, dst: Linear Rec.2020}
-        - !<CDLTransform> {slope: [10, 10, 10]}
-        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: Rec.2100-HLG}
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear FilmLight E-Gamut}
+        - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 12.5260688117]}
+        - !<FileTransform> {src: AgX_Base_Rec2100-HLG_P3_Limited.cube, interpolation: tetrahedral}
 
   - !<ColorSpace>
     name: AgX Base Rec.2100-PQ 1000 nits P3 limited
