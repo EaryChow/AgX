@@ -596,7 +596,9 @@ colorspaces:
         - !<FileTransform> {src: AgX_Base_Rec2100-HLG_P3_Limited.cube, interpolation: tetrahedral}
     to_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Rec.2100-HLG, direction: inverse}
+        - !<FileTransform> {src: No_GR_AgX_Base_Rec2100-HLG.cube, interpolation: tetrahedral, direction: inverse}
+        - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 4.026068812], direction: inverse}
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear Rec.2020, direction: inverse}
 
   - !<ColorSpace>
     name: AgX Base Rec.2100-PQ 1000 nits P3 limited
