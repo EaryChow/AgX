@@ -550,7 +550,7 @@ colorspaces:
         - !<FileTransform> {src: AgX_Base_Rec2100-HLG.cube, interpolation: tetrahedral}
     to_scene_reference: !<GroupTransform>
       children:
-        - !<FileTransform> {src: Inverse_AgX_Base_Rec2100-HLG.cube, interpolation: tetrahedral}
+        - !<FileTransform> {src: No_GR_AgX_Base_Rec2100-HLG.cube, interpolation: tetrahedral, direction: inverse}
         - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 4.026069], direction: inverse}
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear Rec.2020, direction: inverse}
 
