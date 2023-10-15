@@ -1,7 +1,6 @@
 TITLE "No_Guard_Rail_AgX_Formation_Rec2100HLG"
-# AgX Base Rec.2020 Formation LUT designed to be used on Inverse
+# AgX Base Rec.2100 Formation LUT designed to be used on Inverse
 # This LUT expects input (output if inverse) to be Rec.2020 Log2 encoding from -10 stops to +6.5 stops
-# But the end image formation will be Rec2100-HLG
 #  rotate = [3.0, -1, -2.0], inset = [0.4, 0.22, 0.13], outset = [0.4, 0.22, 0.04]
 # The image formed has 40% per-channel shifts
 LUT_3D_SIZE 45
