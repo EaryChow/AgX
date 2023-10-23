@@ -701,7 +701,7 @@ colorspaces:
         - !<ColorSpaceTransform> {src: Rec.2020, dst: Linear Rec.2020}
         - !<MatrixTransform> {matrix: [0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0, 0, 0, 1]}
         - !<ExponentTransform> {value: 2.5, direction: inverse}
-        - !<FileTransform> {src: AgX_False_Color.spi1d, interpolation: tetrahedral}
+        - !<FileTransform> {src: AgX_False_Color.spi1d, interpolation: linear}
 
   - !<ColorSpace>
     name: AgX False Color P3
