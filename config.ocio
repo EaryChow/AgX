@@ -261,7 +261,7 @@ colorspaces:
     equalitygroup:
     bitdepth: 32f
     description: |
-      BT.2100-HLG 1000 nit Display Encoding with SDR peak = 203 nits assumption
+      BT.2100-HLG 1000 nits EOTF with SDR peak = 203 nits assumption
     isdata: false
     from_scene_reference: !<GroupTransform>
       children:
@@ -277,7 +277,7 @@ colorspaces:
     family: Displays/HDR
     equalitygroup: ""
     bitdepth: 32f
-    description: BT.2100-ST.2084 10,000 nits display
+    description: BT.2100-ST.2084 10,000 nits EOTF with SDR peak = 203 nits assumption
     isdata: false
     allocation: uniform
     from_scene_reference: !<GroupTransform>
@@ -286,7 +286,7 @@ colorspaces:
         # The Built-in PQ curve has SDR peak = 100 nits assumption. This CDL line changes it to 203 nits
         # First multiply 0.01 to cancel the 100 nits pre-scaling, and then multiply 203 to do 203 nits pre-scaling
         - !<CDLTransform> {slope: [2.03, 2.03, 2.03]}
-        - !<BuiltinTransform> {style: CURVE - LINEAR_to_ST-2084}
+        - !<BuiltinTransform> {style: CURVE - ST-2084_to_LINEAR, direction: inverse}
 
   - !<ColorSpace>
     name: Non-Color
