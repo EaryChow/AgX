@@ -435,12 +435,12 @@ colorspaces:
     equalitygroup:
     bitdepth: 32f
     description: |
-      AgX Base Image Encoding for BT.2100-HLG 1000 nits matching SDR
+      AgX Base Image Encoding for BT.2100-HLG 1000 nits matching SDR, P3 limited.
     isdata: false
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Rec.2020}
-        - !<ColorSpaceTransform> {src: Rec.2020, dst: Rec.2100-HLG}
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Display P3}
+        - !<ColorSpaceTransform> {src: Display P3, dst: Rec.2100-HLG}
 
   - !<ColorSpace>
     name: AgX Base Rec.2100-HLG P3-lim
@@ -463,12 +463,12 @@ colorspaces:
     equalitygroup:
     bitdepth: 32f
     description: |
-      AgX Base Image Encoding to BT.2100-PQ 1000 nits matching SDR
+      AgX Base Image Encoding to BT.2100-PQ 1000 nits matching SDR, P3 limited.
     isdata: false
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Rec.2020}
-        - !<ColorSpaceTransform> {src: Rec.2020, dst: Rec.2100-PQ}
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Display P3}
+        - !<ColorSpaceTransform> {src: Display P3, dst: Rec.2100-PQ}
 
   - !<ColorSpace>
     name: AgX Base Rec.2100-PQ P3-lim
