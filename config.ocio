@@ -80,16 +80,18 @@ displays:
     - !<View> {name: Raw, colorspace: Non-Color}
   Rec.2100-HLG 1000 nits (SDR Peak = 203 nits):
     - !<View> {name: Standard, colorspace: Rec.2100-HLG (SDR Peak = 203 nits)}
-    - !<View> {name: AgX, colorspace: AgX Base Rec.2100-HLG P3-lim}
-    - !<View> {name: False Color, colorspace: AgX False Color Rec.2020}
+    - !<View> {name: AgX, colorspace: AgX Base Rec.2100-HLG SDR-sim}
+    - !<View> {name: AgX HDR, colorspace: AgX Base Rec.2100-HLG P3-lim}
+    - !<View> {name: False Color, colorspace: AgX False Color Rec.2100-HLG}
     - !<View> {name: Raw, colorspace: Non-Color}
   Rec.2100-PQ 1000 nits (SDR Peak = 203 nits):
     - !<View> {name: Standard, colorspace: Rec.2100-PQ (SDR Peak = 203 nits)}
-    - !<View> {name: AgX, colorspace: AgX Base Rec.2100-PQ P3-lim}
-    - !<View> {name: False Color, colorspace: AgX False Color Rec.2020}
+    - !<View> {name: AgX, colorspace: AgX Base Rec.2100-PQ SDR-sim}
+    - !<View> {name: AgX HDR, colorspace: AgX Base Rec.2100-PQ P3-lim}
+    - !<View> {name: False Color, colorspace: AgX False Color Rec.2100-PQ}
     - !<View> {name: Raw, colorspace: Non-Color}
 active_displays: [sRGB, Display P3, Rec.1886, Rec.2020, Rec.2100-HLG 1000 nits (SDR Peak = 203 nits), Rec.2100-PQ 1000 nits (SDR Peak = 203 nits)]
-active_views: [Standard, Khronos PBR Neutral, AgX, Filmic, Filmic Log, False Color, Raw]
+active_views: [Standard, Khronos PBR Neutral, AgX, AgX HDR, Filmic, Filmic Log, False Color, Raw]
 inactive_colorspaces: [Luminance Compensation Rec.2020, Luminance Compensation sRGB, Luminance Compensation P3, AgX False Color Rec.709, AgX False Color P3, AgX False Color Rec.2020]
 
 colorspaces:
@@ -428,6 +430,19 @@ colorspaces:
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear Rec.2020, direction: inverse}
 
   - !<ColorSpace>
+    name: AgX Base Rec.2100-HLG SDR-sim
+    family: AgX
+    equalitygroup:
+    bitdepth: 32f
+    description: |
+      AgX Base Image Encoding for BT.2100-HLG 1000 nits matching SDR
+    isdata: false
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Rec.2020}
+        - !<ColorSpaceTransform> {src: Rec.2020, dst: Rec.2100-HLG}
+
+  - !<ColorSpace>
     name: AgX Base Rec.2100-HLG P3-lim
     aliases: [AgX Base Rec.2100-HLG P3 limited]
     family: AgX
@@ -441,6 +456,19 @@ colorspaces:
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear FilmLight E-Gamut}
         - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 12.5260688117]}
         - !<FileTransform> {src: AgX_Base_Rec2100-HLG_p3_lim.cube, interpolation: tetrahedral}
+
+  - !<ColorSpace>
+    name: AgX Base Rec.2100-PQ SDR-sim
+    family: AgX
+    equalitygroup:
+    bitdepth: 32f
+    description: |
+      AgX Base Image Encoding to BT.2100-PQ 1000 nits matching SDR
+    isdata: false
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Rec.2020}
+        - !<ColorSpaceTransform> {src: Rec.2020, dst: Rec.2100-PQ}
 
   - !<ColorSpace>
     name: AgX Base Rec.2100-PQ P3-lim
@@ -558,6 +586,32 @@ colorspaces:
       children:
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX False Color Rec.709}
         - !<ColorSpaceTransform> {src: Rec.1886, dst: Rec.2020}
+
+  - !<ColorSpace>
+    name: AgX False Color Rec.2100-HLG
+    family: AgX
+    equalitygroup:
+    bitdepth: 32f
+    description: |
+      A heat-map-like image formed from AgX Base for Rec.2100-HLG displays
+    isdata: false
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX False Color Rec.709}
+        - !<ColorSpaceTransform> {src: Rec.1886, dst: Rec.2100-HLG}
+
+  - !<ColorSpace>
+    name: AgX False Color Rec.2100-PQ
+    family: AgX
+    equalitygroup:
+    bitdepth: 32f
+    description: |
+      A heat-map-like image formed from AgX Base for Rec.2100-PQ displays
+    isdata: false
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX False Color Rec.709}
+        - !<ColorSpaceTransform> {src: Rec.1886, dst: Rec.2100-PQ}
 
   - !<ColorSpace>
     name: Khronos PBR Neutral sRGB
