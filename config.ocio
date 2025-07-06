@@ -78,21 +78,21 @@ displays:
     - !<View> {name: AgX, colorspace: AgX Base Rec.2020}
     - !<View> {name: False Color, colorspace: AgX False Color Rec.2020}
     - !<View> {name: Raw, colorspace: Non-Color}
-  Rec.2100-HLG 1000 nits (SDR Peak = 203 nits):
-    - !<View> {name: Standard, colorspace: Rec.2100-HLG (SDR Peak = 203 nits)}
+  Rec.2100-HLG:
+    - !<View> {name: Standard, colorspace: Rec.2100-HLG}
     - !<View> {name: AgX, colorspace: AgX Base Rec.2100-HLG SDR-sim}
-    - !<View> {name: AgX HDR, colorspace: AgX Base Rec.2100-HLG P3-lim}
+    - !<View> {name: AgX HDR, colorspace: AgX Rec.2100-HLG 1000nits P3-lim}
     - !<View> {name: False Color, colorspace: AgX False Color Rec.2100-HLG}
     - !<View> {name: Raw, colorspace: Non-Color}
-  Rec.2100-PQ 1000 nits (SDR Peak = 203 nits):
-    - !<View> {name: Standard, colorspace: Rec.2100-PQ (SDR Peak = 203 nits)}
+  Rec.2100-PQ:
+    - !<View> {name: Standard, colorspace: Rec.2100-PQ}
     - !<View> {name: AgX, colorspace: AgX Base Rec.2100-PQ SDR-sim}
-    - !<View> {name: AgX HDR, colorspace: AgX Base Rec.2100-PQ P3-lim}
+    - !<View> {name: AgX HDR, colorspace: AgX Rec.2100-PQ 1000nit P3-lim}
     - !<View> {name: False Color, colorspace: AgX False Color Rec.2100-PQ}
     - !<View> {name: Raw, colorspace: Non-Color}
-active_displays: [sRGB, Display P3, Rec.1886, Rec.2020, Rec.2100-HLG 1000 nits (SDR Peak = 203 nits), Rec.2100-PQ 1000 nits (SDR Peak = 203 nits)]
+active_displays: [sRGB, Display P3, Rec.1886, Rec.2020, Rec.2100-HLG, Rec.2100-PQ]
 active_views: [Standard, Khronos PBR Neutral, AgX, AgX HDR, Filmic, Filmic Log, False Color, Raw]
-inactive_colorspaces: [Luminance Compensation Rec.2020, Luminance Compensation sRGB, Luminance Compensation P3, AgX False Color Rec.709, AgX False Color P3, AgX False Color Rec.2020]
+inactive_colorspaces: [Luminance Compensation Rec.2020, AgX False Color Rec.709, AgX False Color P3, AgX False Color Rec.2020, AgX False Color Rec.2100-HLG, AgX False Color Rec.2100-PQ]
 
 colorspaces:
   - !<ColorSpace>
@@ -107,7 +107,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Linear CIE-XYZ D65
-    aliases: [cie_xyz_d65, CIE-XYZ-D65, XYZ, Linear CIE-XYZ I-D65]
+    aliases: [cie_xyz_d65, CIE-XYZ-D65, XYZ, Linear CIE-XYZ I-D65, lin_ciexyzd65_scene]
     family: Chromaticity
     equalitygroup:
     bitdepth: 32f
@@ -118,7 +118,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Linear Rec.709
-    aliases: [Linear, Linear BT.709, Linear BT.709 I-D65, Linear Tristimulus, linrec709, Utility - Linear - sRGB, Utility - Linear - Rec.709, lin_srgb, Linear Rec.709 (sRGB), lin_rec709_srgb, lin_rec709, lin_srgb, "CGI: Linear - Rec.709"]
+    aliases: [Linear, Linear BT.709, Linear BT.709 I-D65, Linear Tristimulus, linrec709, Utility - Linear - sRGB, Utility - Linear - Rec.709, lin_srgb, Linear Rec.709 (sRGB), lin_rec709_srgb, lin_rec709, lin_srgb, lin_rec709_scene, "CGI: Linear - Rec.709"]
     family: Linear
     equalitygroup:
     bitdepth: 32f
@@ -128,11 +128,11 @@ colorspaces:
     from_scene_reference: !<GroupTransform>
       children:
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear CIE-XYZ D65}
-        - !<MatrixTransform> {matrix: [3.2404373564920070, -1.5371305409000549, -0.4985288240756933, 0, -0.9692674982687597, 1.8760136862977035, 0.0415560804587997, 0, 0.0556434463874256, -0.2040259700872272, 1.0572254813610864, 0, 0, 0, 0, 1]}
+        - !<MatrixTransform> {matrix: [3.2409699, -1.5373832, -0.4986108, 0, -0.9692436, 1.8759675, 0.0415551, 0, 0.0556301, -0.2039770, 1.0569715, 0, 0, 0, 0, 1]}
 
   - !<ColorSpace>
     name: Linear DCI-P3 D65
-    aliases: [Linear DCI-P3 I-D65, Linear P3-D65, lin_p3d65, Utility - Linear - P3-D65, Apple DCI-P3 D65]
+    aliases: [Linear DCI-P3 I-D65, Linear P3-D65, lin_p3d65, lin_p3d65_scene, Utility - Linear - P3-D65, Apple DCI-P3 D65]
     family: Linear
     equalitygroup:
     bitdepth: 32f
@@ -142,11 +142,11 @@ colorspaces:
     from_scene_reference: !<GroupTransform>
       children:
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear CIE-XYZ D65}
-        - !<MatrixTransform> {matrix: [2.4935091239346101, -0.9313881794047790, -0.4027127567416516, 0, -0.8294732139295544, 1.7626305796003032, 0.0236242371055886, 0, 0.0358512644339181, -0.0761839369220759, 0.9570295866943110, 0, 0, 0, 0, 1]}
+        - !<MatrixTransform> {matrix: [2.4934969, -0.9313836, -0.4027108, 0, -0.8294890, 1.7626641, 0.0236247, 0, 0.0358458, -0.0761724, 0.9568845, 0, 0, 0, 0, 1]}
 
   - !<ColorSpace>
     name: Linear Rec.2020
-    aliases: [Linear BT.2020 I-D65, Linear BT.2020, lin_rec2020, Utility - Linear - Rec.2020]
+    aliases: [Linear BT.2020 I-D65, Linear BT.2020, lin_rec2020, lin_rec2020_scene, Utility - Linear - Rec.2020]
     family: Linear
     equalitygroup:
     bitdepth: 32f
@@ -156,32 +156,32 @@ colorspaces:
     from_scene_reference: !<GroupTransform>
       children:
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear CIE-XYZ D65}
-        - !<MatrixTransform> {matrix: [ 1.7166634277958805, -0.3556733197301399, -0.2533680878902478, 0, -0.6666738361988869, 1.6164557398246981, 0.0157682970961337, 0, 0.0176424817849772, -0.0427769763827532, 0.9422432810184308, 0, 0, 0, 0, 1]}
+        - !<MatrixTransform> {matrix: [1.7166512, -0.3556708, -0.2533663, 0, -0.6666844, 1.6164812, 0.0157685, 0, 0.0176399, -0.0427706, 0.9421031, 0, 0, 0, 0, 1]}
 
   - !<ColorSpace>
     name: ACES2065-1
-    aliases: [Linear ACES, aces2065_1, ACES - ACES2065-1, lin_ap0, "ACES: Linear - AP0"]
+    aliases: [Linear ACES, aces2065_1, ACES - ACES2065-1, lin_ap0, lin_ap0_scene, "ACES: Linear - AP0"]
     family: Linear
     equalitygroup:
     bitdepth: 32f
     description: |
       Linear AP0 with ACES white point
     isdata: false
-    from_reference: !<GroupTransform>
+    from_scene_reference: !<GroupTransform>
       children:
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear CIE-XYZ D65}
         - !<BuiltinTransform> {style: "UTILITY - ACES-AP0_to_CIE-XYZ-D65_BFD", direction: inverse}
 
   - !<ColorSpace>
     name: ACEScg
-    aliases: [Linear ACEScg, lin_ap1, ACES - ACEScg, "ACEScg: Linear - AP1"]
+    aliases: [Linear ACEScg, lin_ap1, lin_ap1_scene, ACES - ACEScg, "ACEScg: Linear - AP1"]
     family: Linear
     equalitygroup:
     bitdepth: 32f
     description: |
       Linear AP1 with ACES white point
     isdata: false
-    from_reference: !<GroupTransform>
+    from_scene_reference: !<GroupTransform>
       children:
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear CIE-XYZ D65}
         - !<BuiltinTransform> {style: "UTILITY - ACES-AP1_to_CIE-XYZ-D65_BFD", direction: inverse}
@@ -198,11 +198,11 @@ colorspaces:
     from_scene_reference: !<GroupTransform>
       children:
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ I-E, dst: Linear CIE-XYZ I-D65}
-        - !<MatrixTransform> {matrix: [ 0.7053968501, 0.1640413283, 0.08101774865, 0, 0.2801307241, 0.8202066415, -0.1003373656, 0, -0.1037815116, -0.07290725703, 1.265746519, 0, 0, 0, 0, 1], direction: inverse}
+        - !<MatrixTransform> {matrix: [1.5250528, -0.3159135, -0.1226583, 0, -0.5091526, 1.3333274, 0.1382844, 0, 0.0957153, 0.0508974, 0.7879558, 0, 0, 0, 0, 1]}
 
   - !<ColorSpace>
     name: sRGB
-    aliases: [sRGB 2.2, sRGB I-D65, srgb_display, sRGB - Display, g22_rec709, Utility - Gamma 2.2 - Rec.709 - Texture, Utility - sRGB - Texture, sRGB - Texture, srgb_tx, srgb_texture, Input - Generic - sRGB - Texture, "sRGB Display: 2.2 Gamma - Rec.709"]
+    aliases: [sRGB 2.2, sRGB I-D65, srgb_display, srgb_rec709_scene, sRGB - Display, g22_rec709, Utility - Gamma 2.2 - Rec.709 - Texture, Utility - sRGB - Texture, sRGB - Texture, srgb_tx, srgb_texture, Input - Generic - sRGB - Texture, "sRGB Display: 2.2 Gamma - Rec.709"]
     family: Display
     equalitygroup:
     bitdepth: 32f
@@ -257,40 +257,6 @@ colorspaces:
         - !<ExponentTransform> {value: 2.4, direction: inverse}
 
   - !<ColorSpace>
-    name: Rec.2100-HLG (SDR Peak = 203 nits)
-    aliases: [rec2100_hlg_display, Rec.2100-HLG - Display, BT.2100-HLG, Rec.2100-HLG]
-    family: Display
-    equalitygroup:
-    bitdepth: 32f
-    description: |
-      BT.2100-HLG 1000 nits EOTF with SDR peak = 203 nits assumption
-    isdata: false
-    from_scene_reference: !<GroupTransform>
-      children:
-        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear CIE-XYZ D65}
-        # The Built-in HLG curve has SDR peak = 100 nits assumption. This CDL line changes it to 203 nits
-        # First multiply 0.01 to cancel the 100 nits pre-scaling, and then multiply 203 to do 203 nits pre-scaling
-        - !<CDLTransform> {slope: [2.03, 2.03, 2.03]}
-        - !<BuiltinTransform> {style: DISPLAY - CIE-XYZ-D65_to_REC.2100-HLG-1000nit}
-
-  - !<ColorSpace>
-    name: Rec.2100-PQ (SDR Peak = 203 nits)
-    aliases: [Rec.2100-PQ - Display, rec2100_pq_display, Rec.2100-PQ]
-    family: Displays/HDR
-    equalitygroup: ""
-    bitdepth: 32f
-    description: BT.2100-ST.2084 10,000 nits EOTF with SDR peak = 203 nits assumption
-    isdata: false
-    allocation: uniform
-    from_scene_reference: !<GroupTransform>
-      children:
-        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear Rec.2020}
-        # The Built-in PQ curve has SDR peak = 100 nits assumption. This CDL line changes it to 203 nits
-        # First multiply 0.01 to cancel the 100 nits pre-scaling, and then multiply 203 to do 203 nits pre-scaling
-        - !<CDLTransform> {slope: [2.03, 2.03, 2.03]}
-        - !<BuiltinTransform> {style: CURVE - ST-2084_to_LINEAR, direction: inverse}
-
-  - !<ColorSpace>
     name: Non-Color
     aliases: [Generic Data, Non-Colour Data, Raw, Utility - Raw]
     family: Data
@@ -308,7 +274,7 @@ colorspaces:
     description: |
       Log based filmic shaper with 16.5 stops of latitude, and 25 stops of dynamic range
     isdata: false
-    from_reference: !<GroupTransform>
+    from_scene_reference: !<GroupTransform>
       children:
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear Rec.709}
         - !<AllocationTransform> {allocation: lg2, vars: [-12.473931188, 12.526068812]}
@@ -327,7 +293,7 @@ colorspaces:
     description: |
       sRGB display space with Filmic view transform
     isdata: false
-    from_reference: !<GroupTransform>
+    from_scene_reference: !<GroupTransform>
       children:
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Filmic Log}
         - !<FileTransform> {src: filmic_to_0-70_1-03.spi1d, interpolation: linear}
@@ -350,44 +316,6 @@ colorspaces:
         - !<ColorSpaceTransform> {src: Linear FilmLight E-Gamut, dst: Linear Rec.2020}
 
   - !<ColorSpace>
-    name: Luminance Compensation sRGB
-    family: Utilities
-    equalitygroup:
-    bitdepth: 32f
-    description: |
-      Offset the negative values in BT.709 and compensate for luminance, ensuring there is no negative values in Rec.709
-    isdata: false
-    from_scene_reference: !<GroupTransform>
-      children:
-        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear FilmLight E-Gamut}
-        - !<MatrixTransform> {matrix: [0.960599732262383, 0.0196075412762159, 0.019792726461401, 0, 0.0105997322623829, 0.969607541276216, 0.0197927264614012, 0, 0.0105997322623829, 0.0196075412762162, 0.969792726461401, 0, 0, 0, 0, 1]}
-        - !<FileTransform> {src: Guard_Rail_Shaper_EOTF.spi1d, interpolation: linear, direction: inverse}
-        - !<FileTransform> {src: luminance_compensation_srgb.cube, interpolation: tetrahedral}
-        - !<FileTransform> {src: Guard_Rail_Shaper_EOTF.spi1d, interpolation: linear}
-        - !<MatrixTransform> {matrix: [0.960599732262383, 0.0196075412762159, 0.019792726461401, 0, 0.0105997322623829, 0.969607541276216, 0.0197927264614012, 0, 0.0105997322623829, 0.0196075412762162, 0.969792726461401, 0, 0, 0, 0, 1], direction: inverse}
-        - !<ColorSpaceTransform> {src: Linear FilmLight E-Gamut, dst: Linear Rec.709}
-        - !<RangeTransform> {min_in_value: 0, min_out_value: 0}
-
-  - !<ColorSpace>
-    name: Luminance Compensation P3
-    family: Utilities
-    equalitygroup:
-    bitdepth: 32f
-    description: |
-      Offset the negative values in P3 and compensate for luminance, ensuring there is no negative values in P3
-    isdata: false
-    from_scene_reference: !<GroupTransform>
-      children:
-        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear FilmLight E-Gamut}
-        - !<MatrixTransform> {matrix: [0.960599732262383, 0.0196075412762159, 0.019792726461401, 0, 0.0105997322623829, 0.969607541276216, 0.0197927264614012, 0, 0.0105997322623829, 0.0196075412762162, 0.969792726461401, 0, 0, 0, 0, 1]}
-        - !<FileTransform> {src: Guard_Rail_Shaper_EOTF.spi1d, interpolation: linear, direction: inverse}
-        - !<FileTransform> {src: luminance_compensation_p3.cube, interpolation: tetrahedral}
-        - !<FileTransform> {src: Guard_Rail_Shaper_EOTF.spi1d, interpolation: linear}
-        - !<MatrixTransform> {matrix: [0.960599732262383, 0.0196075412762159, 0.019792726461401, 0, 0.0105997322623829, 0.969607541276216, 0.0197927264614012, 0, 0.0105997322623829, 0.0196075412762162, 0.969792726461401, 0, 0, 0, 0, 1], direction: inverse}
-        - !<ColorSpaceTransform> {src: Linear FilmLight E-Gamut, dst: Linear DCI-P3 D65}
-        - !<RangeTransform> {min_in_value: 0, min_out_value: 0}
-
-  - !<ColorSpace>
     name: AgX Log
     family: Log Encodings
     equalitygroup:
@@ -395,12 +323,10 @@ colorspaces:
     description: |
       Log Encoding with Chroma inset and rotation of primaries, and with 25 Stops of Dynamic Range
     isdata: false
-    from_reference: !<GroupTransform>
-      children:
     from_scene_reference: !<GroupTransform>
       children:
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Luminance Compensation Rec.2020}
-        # rotate = [3.0, -1, -2.0], inset = [0.4, 0.22, 0.13]
+        # Rec.2020 generated parameters rotate = [2.13976149, -1.22827335, -3.05174246], inset = [0.32965205, 0.28051336, 0.12475368]
         - !<MatrixTransform> {matrix: [0.856627153315983, 0.0951212405381588, 0.0482516061458583, 0, 0.137318972929847, 0.761241990602591, 0.101439036467562, 0, 0.11189821299995, 0.0767994186031903, 0.811302368396859, 0, 0, 0, 0, 1]}
         - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 12.5260688117]}
     to_scene_reference: !<GroupTransform>
@@ -428,61 +354,6 @@ colorspaces:
         - !<FileTransform> {src: Inverse_AgX_Base_Rec2020.cube, interpolation: tetrahedral}
         - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 4.026069], direction: inverse}
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear Rec.2020, direction: inverse}
-
-  - !<ColorSpace>
-    name: AgX Base Rec.2100-HLG SDR-sim
-    family: AgX
-    equalitygroup:
-    bitdepth: 32f
-    description: |
-      AgX Base Image Encoding for BT.2100-HLG 1000 nits matching SDR, P3 limited.
-    isdata: false
-    from_scene_reference: !<GroupTransform>
-      children:
-        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Display P3}
-        - !<ColorSpaceTransform> {src: Display P3, dst: Rec.2100-HLG}
-
-  - !<ColorSpace>
-    name: AgX Base Rec.2100-HLG P3-lim
-    aliases: [AgX Base Rec.2100-HLG P3 limited]
-    family: AgX
-    equalitygroup:
-    bitdepth: 32f
-    description: |
-      AgX Base Image Encoding for BT.2100-HLG 1000 nits P3 limited Display (SDR = 203 nits)
-    isdata: false
-    from_scene_reference: !<GroupTransform>
-      children:
-        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear FilmLight E-Gamut}
-        - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 12.5260688117]}
-        - !<FileTransform> {src: AgX_Base_Rec2100-HLG_p3_lim.cube, interpolation: tetrahedral}
-
-  - !<ColorSpace>
-    name: AgX Base Rec.2100-PQ SDR-sim
-    family: AgX
-    equalitygroup:
-    bitdepth: 32f
-    description: |
-      AgX Base Image Encoding to BT.2100-PQ 1000 nits matching SDR, P3 limited.
-    isdata: false
-    from_scene_reference: !<GroupTransform>
-      children:
-        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Display P3}
-        - !<ColorSpaceTransform> {src: Display P3, dst: Rec.2100-PQ}
-
-  - !<ColorSpace>
-    name: AgX Base Rec.2100-PQ P3-lim
-    aliases: [AgX Base Rec.2100-PQ 1000 nits P3 limited]
-    family: AgX
-    equalitygroup:
-    bitdepth: 32f
-    description: |
-      AgX Base Image Encoding for BT.2100-PQ 1000 nits P3 limited Display (SDR = 203 nits)
-    isdata: false
-    from_scene_reference: !<GroupTransform>
-      children:
-        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Rec.2100-HLG P3-lim}
-        - !<ColorSpaceTransform> {src: Rec.2100-HLG, dst: Rec.2100-PQ}
 
   - !<ColorSpace>
     name: AgX Base sRGB
@@ -556,7 +427,7 @@ colorspaces:
       children:
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Rec.2020}
         - !<ColorSpaceTransform> {src: Rec.2020, dst: Linear Rec.2020}
-        - !<MatrixTransform> {matrix: [0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0, 0, 0, 1]}
+        - !<MatrixTransform> {matrix: [0.2589235355689848, 0.6104985346066525, 0.13057792982436284, 0, 0.2589235355689848, 0.6104985346066525, 0.13057792982436284, 0, 0.2589235355689848, 0.6104985346066525, 0.13057792982436284, 0, 0, 0, 0, 1]}
         - !<ExponentTransform> {value: 2.5, direction: inverse}
         - !<FileTransform> {src: AgX_False_Color.spi1d, interpolation: linear}
 
@@ -588,6 +459,106 @@ colorspaces:
         - !<ColorSpaceTransform> {src: Rec.1886, dst: Rec.2020}
 
   - !<ColorSpace>
+    name: Khronos PBR Neutral sRGB
+    family: Khronos PBR Neutral
+    equalitygroup:
+    bitdepth: 32f
+    description: |
+      Khronos PBR Neutral Image Encoding for sRGB Display
+    isdata: false
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear Rec.709}
+        - !<AllocationTransform> {allocation: lg2, vars: [-9, 10]}
+        - !<FileTransform> {src: pbrNeutral.cube, interpolation: tetrahedral}
+        - !<ColorSpaceTransform> {src: Linear Rec.709, dst: sRGB}
+
+  - !<ColorSpace>
+    name: Rec.2100-PQ
+    aliases: [rec2100_pq_display, Rec.2100-PQ - Display]
+    family: Display
+    equalitygroup: ""
+    bitdepth: 32f
+    description: Rec.2100-PQ 10000 nits peak display with reference white at 100 nits
+    isdata: false
+    categories: [file-io]
+    encoding: hdr-video
+    allocation: uniform
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear CIE-XYZ D65}
+        - !<BuiltinTransform> {style: DISPLAY - CIE-XYZ-D65_to_REC.2100-PQ}
+
+  - !<ColorSpace>
+    name: Rec.2100-HLG
+    aliases: [rec2100_hlg_display, Rec.2100-HLG - Display]
+    family: Display
+    equalitygroup: ""
+    bitdepth: 32f
+    description: Rec.2100-HLG 1000 nits peak display with reference white at 100 nits
+    isdata: false
+    categories: [file-io]
+    encoding: hdr-video
+    allocation: uniform
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear CIE-XYZ D65}
+        - !<BuiltinTransform> {style: DISPLAY - CIE-XYZ-D65_to_REC.2100-HLG-1000nit}
+
+  - !<ColorSpace>
+    name: AgX Base Rec.2100-HLG SDR-sim
+    family: AgX
+    equalitygroup:
+    bitdepth: 32f
+    description: |
+      AgX Base P3 limited Image Encoding for BT.2100-HLG matching SDR
+    isdata: false
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Display P3}
+        - !<ColorSpaceTransform> {src: Display P3, dst: Rec.2100-HLG}
+
+  - !<ColorSpace>
+    name: AgX Base Rec.2100-PQ SDR-sim
+    family: AgX
+    equalitygroup:
+    bitdepth: 32f
+    description: |
+      AgX Base P3 limited Image Encoding for BT.2100-PQ matching SDR
+    isdata: false
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Base Display P3}
+        - !<ColorSpaceTransform> {src: Display P3, dst: Rec.2100-PQ}
+
+  - !<ColorSpace>
+    name: AgX Rec.2100-HLG 1000nits P3-lim
+    family: AgX
+    equalitygroup:
+    bitdepth: 32f
+    description: |
+      AgX 1000 nits peak Image Encoding for BT.2100-HLG P3 limited Display. Reference white is 100nits
+    isdata: false
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear FilmLight E-Gamut}
+        - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 12.5260688117]}
+        - !<FileTransform> {src: AgX_Base_Rec2100-HLG_p3_lim.cube, interpolation: tetrahedral}
+
+  - !<ColorSpace>
+    name: AgX Rec.2100-PQ 1000nit P3-lim
+    family: AgX
+    equalitygroup:
+    bitdepth: 32f
+    description: |
+      AgX 1000 nits peak Image Encoding for BT.2100-PQ P3 limited Display. Reference white is 100nits
+    isdata: false
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX Rec.2100-HLG 1000nits P3-lim}
+        - !<ColorSpaceTransform> {src: Rec.2100-HLG, dst: Rec.2100-PQ}
+
+  - !<ColorSpace>
     name: AgX False Color Rec.2100-HLG
     family: AgX
     equalitygroup:
@@ -612,21 +583,6 @@ colorspaces:
       children:
         - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: AgX False Color Rec.709}
         - !<ColorSpaceTransform> {src: Rec.1886, dst: Rec.2100-PQ}
-
-  - !<ColorSpace>
-    name: Khronos PBR Neutral sRGB
-    family: Khronos PBR Neutral
-    equalitygroup:
-    bitdepth: 32f
-    description: |
-      Khronos PBR Neutral Image Encoding for sRGB Display
-    isdata: false
-    from_scene_reference: !<GroupTransform>
-      children:
-        - !<ColorSpaceTransform> {src: Linear CIE-XYZ E, dst: Linear Rec.709}
-        - !<AllocationTransform> {allocation: lg2, vars: [-9, 10]}
-        - !<FileTransform> {src: pbrNeutral.cube, interpolation: tetrahedral}
-        - !<ColorSpaceTransform> {src: Linear Rec.709, dst: sRGB}
 
 looks:
   - !<Look>
@@ -700,7 +656,7 @@ looks:
     transform: !<GroupTransform>
       children:
         - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 12.5260688117], direction: inverse}
-        - !<MatrixTransform> {matrix: [0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0, 0, 0, 1]}
+        - !<MatrixTransform> {matrix: [0.2589235355689848, 0.6104985346066525, 0.13057792982436284, 0, 0.2589235355689848, 0.6104985346066525, 0.13057792982436284, 0, 0.2589235355689848, 0.6104985346066525, 0.13057792982436284, 0, 0, 0, 0, 1]}
         - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 12.5260688117]}
 
   - !<Look>
@@ -803,7 +759,7 @@ looks:
     transform: !<GroupTransform>
       children:
         - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 12.5260688117], direction: inverse}
-        - !<MatrixTransform> {matrix: [0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0.2658180370250449, 0.59846986045365, 0.1357121025213052, 0, 0, 0, 0, 1]}
+        - !<MatrixTransform> {matrix: [0.2589235355689848, 0.6104985346066525, 0.13057792982436284, 0, 0.2589235355689848, 0.6104985346066525, 0.13057792982436284, 0, 0.2589235355689848, 0.6104985346066525, 0.13057792982436284, 0, 0, 0, 0, 1]}
         - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 12.5260688117]}
 
   - !<Look>
@@ -879,6 +835,109 @@ looks:
 
   - !<Look>
     name: False Color - Very Low Contrast
+    process_space: AgX Log
+    description: A Very Low Contrast Look
+    transform: !<GroupTransform>
+      children:
+        - !<GradingPrimaryTransform>
+          style: log
+          contrast: {rgb: [0.7, 0.7, 0.7], master: 1}
+          saturation: 1.15
+          pivot: {contrast: -0.2}
+
+  - !<Look>
+    name: AgX HDR - Punchy
+    process_space: AgX Log
+    description: A darkening punchy look
+    transform: !<GroupTransform>
+      children:
+        - !<GradingToneTransform>
+         shadows: {rgb: [0.2, 0.2, 0.2], master: 0.35, start: 0.4, pivot: 0.1}
+        - !<CDLTransform> {power: [1.0912, 1.0912, 1.0912]}
+
+  - !<Look>
+    name: AgX HDR - Greyscale
+    process_space: AgX Log
+    description: A Black and White Look
+    transform: !<GroupTransform>
+      children:
+        - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 12.5260688117], direction: inverse}
+        - !<MatrixTransform> {matrix: [0.2589235355689848, 0.6104985346066525, 0.13057792982436284, 0, 0.2589235355689848, 0.6104985346066525, 0.13057792982436284, 0, 0.2589235355689848, 0.6104985346066525, 0.13057792982436284, 0, 0, 0, 0, 1]}
+        - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 12.5260688117]}
+
+  - !<Look>
+    name: AgX HDR - Very High Contrast
+    process_space: AgX Log
+    description: A Very High Contrast Look
+    transform: !<GroupTransform>
+      children:
+        - !<GradingPrimaryTransform>
+          style: log
+          contrast: {rgb: [1.57, 1.57, 1.57], master: 1}
+          saturation: 0.9
+          pivot: {contrast: -0.2}
+
+  - !<Look>
+    name: AgX HDR - High Contrast
+    process_space: AgX Log
+    description: A High Contrast Look
+    transform: !<GroupTransform>
+      children:
+        - !<GradingPrimaryTransform>
+          style: log
+          contrast: {rgb: [1.4, 1.4, 1.4], master: 1}
+          saturation: 0.95
+          pivot: {contrast: -0.2}
+
+  - !<Look>
+    name: AgX HDR - Medium High Contrast
+    process_space: AgX Log
+    description: A Medium High Contrast Look
+    transform: !<GroupTransform>
+      children:
+        - !<GradingPrimaryTransform>
+          style: log
+          contrast: {rgb: [1.2, 1.2, 1.2], master: 1}
+          saturation: 1
+          pivot: {contrast: -0.2}
+
+  - !<Look>
+    name: AgX HDR - Base Contrast
+    process_space: AgX Log
+    description: A Base Contrast Look
+    transform: !<GroupTransform>
+      children:
+        - !<GradingPrimaryTransform>
+          style: log
+          contrast: {rgb: [1, 1, 1], master: 1}
+          pivot: {contrast: -0.2}
+
+  - !<Look>
+    name: AgX HDR - Medium Low Contrast
+    process_space: AgX Log
+    description: A Medium Low Contrast Look
+    transform: !<GroupTransform>
+      children:
+        - !<GradingPrimaryTransform>
+          style: log
+          contrast: {rgb: [0.9, 0.9, 0.9], master: 1}
+          saturation: 1.05
+          pivot: {contrast: -0.2}
+
+  - !<Look>
+    name: AgX HDR - Low Contrast
+    process_space: AgX Log
+    description: A Low Contrast Look
+    transform: !<GroupTransform>
+      children:
+        - !<GradingPrimaryTransform>
+          style: log
+          contrast: {rgb: [0.8, 0.8, 0.8], master: 1}
+          saturation: 1.1
+          pivot: {contrast: -0.2}
+
+  - !<Look>
+    name: AgX HDR - Very Low Contrast
     process_space: AgX Log
     description: A Very Low Contrast Look
     transform: !<GroupTransform>
