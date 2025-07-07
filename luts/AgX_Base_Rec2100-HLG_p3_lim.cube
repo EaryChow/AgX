@@ -1,11 +1,12 @@
 TITLE "AgX_Formation Rec.2100 HLG P3 limited"
-# AgX Base Rec.2100 HLG Formation P3 Limited LUT
+# AgX Rec.2100 HLG 1000 nits Formation P3 Limited LUT
 # This LUT expects input to be E Gamut Log2 encoding from -10 stops to +15 stops
 # But the end image formation will be from -10 to 10 encoded in power 2.4
-# Rec.709 generated parameters rotate = [3.0, -1, -2.0], inset = [0.4, 0.22, 0.13], outset = [0.4, 0.22, 0.04]
-#  Same inset matrix can be generated in Rec.2020 with rotation [2.13976149, -1.22827335, -3.05174246], Inset: [0.32965205, 0.28051336, 0.12475368], outset = [0.32317438, 0.28325605, 0.0374326]
+# Inset matrix can be generated in Rec.2020 with rotation [2.13976149, -1.22827335, -3.05174246],
+# Inset: [0.32965205+0.3, 0.28051336+0.3, 0.12475368+0.3],
+# outset = [0.32317438+0.3, 0.28325605+0.3, 0.0374326+0.3].
 # The image formed has 40% per-channel shifts
-# HDR max nits is 1000, SDR max nits is 100
+# HDR max nits is 1000, Reference White nits is 100
 LUT_3D_SIZE 57
 0.0000178 0.0000077 0.0000643
 0.0056552 0.0015734 0
