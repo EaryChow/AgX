@@ -475,7 +475,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Rec.2100-PQ
-    aliases: [rec2100_pq_display, Rec.2100-PQ - Display]
+    aliases: [rec2100_pq_display, Rec.2100-PQ - Display, pq_rec2020_display]
     family: Display
     equalitygroup: ""
     bitdepth: 32f
@@ -491,7 +491,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Rec.2100-HLG
-    aliases: [rec2100_hlg_display, Rec.2100-HLG - Display]
+    aliases: [rec2100_hlg_display, Rec.2100-HLG - Display, hlg_rec2020_display]
     family: Display
     equalitygroup: ""
     bitdepth: 32f
