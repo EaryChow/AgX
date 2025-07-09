@@ -80,13 +80,13 @@ displays:
     - !<View> {name: Raw, colorspace: Non-Color}
   Rec.2100-HLG:
     - !<View> {name: Standard, colorspace: Rec.2100-HLG}
-    - !<View> {name: AgX, colorspace: AgX Base Rec.2100-HLG SDR-sim}
+    - !<View> {name: AgX, colorspace: AgX SDR Rec.2100-HLG}
     - !<View> {name: AgX HDR, colorspace: AgX Rec.2100-HLG 1000nits P3-lim}
     - !<View> {name: False Color, colorspace: AgX False Color Rec.2100-HLG}
     - !<View> {name: Raw, colorspace: Non-Color}
   Rec.2100-PQ:
     - !<View> {name: Standard, colorspace: Rec.2100-PQ}
-    - !<View> {name: AgX, colorspace: AgX Base Rec.2100-PQ SDR-sim}
+    - !<View> {name: AgX, colorspace: AgX SDR Rec.2100-PQ}
     - !<View> {name: AgX HDR, colorspace: AgX Rec.2100-PQ 1000nit P3-lim}
     - !<View> {name: False Color, colorspace: AgX False Color Rec.2100-PQ}
     - !<View> {name: Raw, colorspace: Non-Color}
@@ -506,7 +506,7 @@ colorspaces:
         - !<BuiltinTransform> {style: DISPLAY - CIE-XYZ-D65_to_REC.2100-HLG-1000nit}
 
   - !<ColorSpace>
-    name: AgX Base Rec.2100-HLG SDR-sim
+    name: AgX SDR Rec.2100-HLG
     family: AgX
     equalitygroup:
     bitdepth: 32f
@@ -519,7 +519,7 @@ colorspaces:
         - !<ColorSpaceTransform> {src: Display P3, dst: Rec.2100-HLG}
 
   - !<ColorSpace>
-    name: AgX Base Rec.2100-PQ SDR-sim
+    name: AgX SDR Rec.2100-PQ
     family: AgX
     equalitygroup:
     bitdepth: 32f
