@@ -5,6 +5,7 @@ TITLE "AgX_Formation Rec.2100 HLG P3 limited"
 # Inset matrix can be generated in Rec.2020 with rotation [2.13976149, -1.22827335, -3.05174246],
 # Inset: [0.32965205, 0.28051336, 0.12475368], outset = [0.32317438, 0.28325605, 0.0374326].
 # HDR purity set to 0.5, HDR extra shoulder power is 2.0
+# calculated from power(1000 / 100, log10(2.0))
 # The image formed has 40% per-channel shifts
 # HDR max nits is 1000, Reference White nits is 100
 LUT_3D_SIZE 57
