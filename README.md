@@ -121,7 +121,7 @@ For exposure-stop range reference, here is the exposure sweep:
      In this case, please consider Blender AgX Log as having AgX's mechanism baked in, by assuming it to be in Rec.2020 primaries.
    - If you are using Blender AgX Log for technical conversion or footage storage, so you want to be able to completely undo Blender AgX Log:
 
-     In this case, you can consider Blender AgX Log has having the below colorimetry specification:
+     In this case, you can consider Blender AgX Log as having the below colorimetry specification:
      
       `R xy: [0.9838378199, 0.2394126467], G xy: [0.0970499811, 0.9900566739], B xy: [0.1081307578, -0.0323324412] White point D65: [0.3127, 0.3290]`
 
