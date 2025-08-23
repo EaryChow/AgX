@@ -46,6 +46,7 @@ EDIT: This version of AgX has been merged to Blender 4.0 main.
 The config includes the following view transform:
 - `Standard` A.K.A `Display's Native` The display device's native colorspace as view transform. Included for compatibility reason.
 - `AgX` The Filmic-like sigmoid based image formation with 16.5 stops of exposure range.
+- `AgX - HDR 1000 nits` The AgX picture formation for 1000 nits peak display medium, with middle gray set to 18% of 100 nits. Exposure range is the same as regular AgX.
 - `False Color` A heat-map-like imagery derived from `AgX`'s formed image. uses BT.2020's CIE 2012 luminance for luminance coefficients evaluation. 
 
 **False Color ranges**
@@ -112,6 +113,8 @@ For exposure-stop range reference, here is the exposure sweep:
    - `Rec.1886` BT.1886 2.4 Exponent EOTF Display
    - `Display P3`Display P3 with sRGB piece-wise encoding for reference display
    - `Rec.2020` BT.2020 2.4 Exponent EOTF Display
+   - `Rec.2100-HLG` Rec.2100-HLG 1000 nits peak display with reference white at 100 nits
+   - `Rec.2100-PQ` Rec.2100-PQ 10000 nits peak display with reference white at 100 nits
    - `Non-Color` Generic data that is not color, will not apply any color transform
  - `AgX Log`
   Blender AgX Log has a log curve of pure log2, normalized to cover the exposure range from -10 stops to +15 stops.
