@@ -1,6 +1,13 @@
 ![AgX_vs_Filmic](https://user-images.githubusercontent.com/59176246/228416284-fe8e5a45-2dbb-4edf-bb36-52906c32a813.png)
 AgX (Left) vs Filmic (Right)
 
+Resolve DCTL implementation: https://github.com/EaryChow/Blender-AgX-Resolve
+
+Nuke implementation: https://github.com/EaryChow/Blender-AgX-Nuke
+
+Also available in Darktable 5.3:
+https://github.com/darktable-org/darktable/releases/tag/nightly
+
 **What?**
 
 
